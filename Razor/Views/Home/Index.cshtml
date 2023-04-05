@@ -1,8 +1,125 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-}
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Razor</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Razor.styles.css" asp-append-version="true" />
+</head>
+<body>
+    @*1. Dichiarare una variabile valorizzandola con il nostro nome.
+    Dichiarare un'altra variabile valorizzandola con il nostro cognome.
+    Stampare il nostro nome e cognome all'interno di un tag h2.*@
+    @{
+        var myName = "Francesco";
+        var mySurname = "Esposito";
+    }
+    <div class="text-center">
+        <h1>Es.1</h1>
+        <h2>Ciao mi chiamo: @myName e il mio cognome e: @mySurname</h2>
+    </div>
+    @*2. Creare una funzione che stampa la somma dei numeri che vanno da 1 a n 
+    (con n passato come parametro - n incluso) 
+    Stampare dentro uno span il risultato.*@
+    @{
+        int sumNumber( int n)
+        {
+            int sum = 0;
+            for(int i = 1; i <= n; i++)
+            {
+                sum += i;
+            }
+                return sum;
+        }
+    }
+    <div class="text-center">
+        <h1>Es.2</h1>
+        <span class="fw-bold">@sumNumber(8)</span>
+    </div>
+   @* 3. Contare quante volte la lettera a è presente 
+      nella frase "nel mezzo del cammin di nostra vita" 
+      e stampare questo valore in pagina*@
+    @{
+        var frase = "nel mezzo del cammin di nostra vita";
+        int conteggioLettera(string phrase)
+        {
+            int conteggio = 0; 
+            foreach(char c in phrase)
+            {
+                if(c == 'a')
+                {
+                    conteggio++;
+                }
+            }
+            return conteggio;
+        }
+        
+    }
+    <div class="text-center">
+        <h1>Es.3</h1>
+        <p class="fw-bold">La lettera a nella frase e presente: @conteggioLettera(frase)</p>
+    </div>
+    @*  4. Creare una List
+        <int> di 20 numeri interi (generati random da 1 a 90, 1 e 90 inclusi) 
+        e mostrare in pagina solo i numeri compresi tra 20 e 70*@
+    @{
+        Random random = new Random();
+        List<int> numeri = new List<int>();
+        for (int i = 0; i <= 20; i++)
+        {
+            numeri.Add(random.Next(1, 90));
+        }
+    }
+    <div class="text-center">
+        <h1>Es.4</h1>
+        <ul>
+            @foreach (var numero in numeri)
+            {
+                
+                if (numero >= 20 && numero <= 70)
+                {
+                    <li class="list-unstyled">@numero</li>
+                }
+            }
+        </ul>
+    </div>
+
+    @*5. Stampare in pagina la data e l'ora attuale (usando la classe DateTime) 
+      con il formato anno-mese-giorno ore:minuti:secondi*@
+      @{
+          var dataOggi = DateTime.Now;
+      }
+      <div class="text-center">
+        <h1>Es.5</h1>
+          <p class="fw-bold">La data di oggi e: @dataOggi</p>
+      </div>
+
+
+   @* 6. Partendo dalla data di oggi (usando la classe DateTime) stampare in pagina
+    a. la data di 7 giorni fa
+    b. che giorno della settimana è oggi (il risultato dovrà essere il nome del giorno (Lunedì, Martedì, ...)
+    c. che giorno della settimana sarà nello stesso giorno e mese di oggi ma tra un anno (il risultato dovrà essere il nome del giorno (Lunedì, Martedì, ...)*@
+    @{
+        var setteGiorniFa = dataOggi.AddDays(-7);
+        var nomeGiorno = dataOggi.ToString("dddd");
+        var traUnAnno = dataOggi.AddYears(1);
+        var nomeGiornoTraUnAnno = traUnAnno.ToString("dddd");
+    }
+    <div class="text-center">
+        <h1>Es.6.a</h1>
+        <p class="fw-bold">La data di 7 giorno fa e: @setteGiorniFa</p>
+        <h1>Es.6.b</h1>
+        <p class="fw-bold">Il giorno delle settimana di oggi e:@nomeGiorno</p>
+        <h1>Es.6.c</h1>
+        <p class="fw-bold">Il giorno delle settimana di oggi e:@nomeGiornoTraUnAnno</p>
+    </div>
+</body>
+</html>
+
+
