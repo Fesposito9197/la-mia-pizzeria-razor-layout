@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Razor"
+    "\\la-mia-pizzeria-static",
+    "\\la-mia-pizzeria-static\\Views",
+    "\\la-mia-pizzeria-static\\Views\\Home"
   ],
+  "SelectedNode": "\\la-mia-pizzeria-static\\Views\\Home\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }
